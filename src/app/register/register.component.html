@@ -1,0 +1,59 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-center mb-5 mt-3 ">
+                        <h2>Register</h2>
+                    </div>
+
+                    <form [formGroup]="signupForm" (ngSubmit)="signUp()">
+
+                        <div class="form-group mb-3">
+                          <label>First Name</label>
+                          <input type="text" name="fname" formControlName="fname"  class="form-control" placeholder="" autocomplete="off">
+                          <p class="text-danger" *ngIf="is_submitted && errorControl.fname.errors?.required"> 
+                            First name is required
+                          </p>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label>Last Name</label>
+                            <input type="text" name="lname" formControlName="lname" class="form-control" autocomplete="off" placeholder="">
+                            <p class="text-danger"
+                            *ngIf="is_submitted && errorControl.lname.errors?.required">
+                           Last name is required
+                        </p>
+                        
+                          </div>
+                          <div class="form-group mb-3">
+                            <label>Email address</label>
+                            <input type="email" name="email" formControlName="email" class="form-control" uniqueEmail autocomplete="off" required placeholder="">
+                            <p class="text-danger" *ngIf="is_submitted && errorControl.email.errors?.required"> Email is required</p>
+                          </div>
+
+                        <div class="form-group mb-3">
+                          <label>Password</label>
+                          <input type="password" name="password" formControlName="password" class="form-control" placeholder="">
+                          <p class="text-danger" *ngIf="is_submitted && errorControl.password.errors?.required"> Password is required </p>
+                          <p class="text-danger" *ngIf="password.invalid && password.touched"> Password is required min 5 and max 10 length</p>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary form-control mb-3">Register Now</button>
+
+                      </form>
+                      
+                      <div class="text-center">
+                        <a class="swtich-page" routerLink="/login">Already have an account? Login</a>
+                      </div>
+                      
+                </div>
+            </div>
+           
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+</div>

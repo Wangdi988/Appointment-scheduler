@@ -1,0 +1,47 @@
+<div class="row">
+    <div class="col-2 col-height">
+
+        <ul class="mt-3">
+            <li><a>
+               <h4 class="dash">Dashboard</h4>
+            </a></li>
+            <li class="list" routerLink="./user-details"><a >
+                User Details
+            </a></li>
+            <li class="list" routerLink="./add-room-list"><a >
+                Room List
+             </a></li>
+            <li class="list" routerLink="./appointment-list"><a >
+                Appointment List
+            </a></li>
+        </ul>
+
+    </div>
+</div>
+
+
+<div class="body-with">
+    <div class="row">
+
+        <div class="col-md-12">
+           <div class="border-header">
+              <div class="mr">
+                  <div class="dropdown">
+
+                      <button class="dropdown-toggle btns" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{fname}} {{lname}}
+                      </button>
+
+                      <div class="drop-down-list">
+                          <div class="drop-list">
+                            <button (click)="logout()" class="btns btn-sm">Log Out</button> 
+                          </div>
+                      </div>
+
+                  </div>
+              </div>
+           </div>
+        </div>
+
+    </div>
+</div>

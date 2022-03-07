@@ -1,0 +1,73 @@
+<div class="body-with">
+    <div class="container-fluid">
+        <div class="row mt-3">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <div class="cards">
+                    <div class="cards-body mt-4">
+                        <form [formGroup]="addRoomForm">
+                            <div class="row">
+
+                                <div class="col-md-2"></div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Add Meeting Room</label>
+                                        <input type="text" formControlName="roomList" [(ngModel)]="roomObj.roomList" class="form-control form-control-sm" >
+                                        <p class="text-danger" *ngIf="is_submitted && errorControl.roomList.errors?.required"> Field is required</p>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2 mt-4">
+                                    <button *ngIf="!isEdit" type="submit" (click)="onAddRoom(addRoomForm)" class="btn btn-primary btn-sm form-control">Add New Room</button>
+                                    <button *ngIf="isEdit" type="submit" (click)=" updateRoom()" class="btn btn-primary btn-sm form-control">Edit Room List</button>
+                                </div>
+                                
+                                <div class="col-md-2"></div>
+                            </div>
+                          
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+
+               <div class="card mt-4">
+
+                    <div class="card-header">
+                        <h4 class="text-center">Room List</h4>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-sm">
+                                
+                                <tbody>
+                                    <tr>
+                                        <td class="table-head">#</td>
+                                        <td class="table-head">Room List</td>
+                                        <td class="table-head">Action</td>
+                                    </tr>
+
+                                    <tr *ngFor="let room of roomList, let i = index">
+                                        <td >{{i+1}}</td>
+                                        <td>{{room.roomList}}</td>
+                                        <td>
+                                            <button (click)="editList(room)" class="btn btn-sm btn-success">Edit</button>
+                                            <button class="btn btn-sm btn-danger mx-3" (click)="deleteRoomList(room)"> Delete</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+               </div>  
+            </div>
+        </div>
+    </div>
+</div>

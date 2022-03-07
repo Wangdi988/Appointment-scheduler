@@ -1,0 +1,232 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-12">
+
+      <div class="card mt-4">
+
+        <div class="card-header">
+          <span> Appointment List </span>
+          <span class="item-mr">
+            <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#Appointment">
+              Create Appointment
+            </button>
+          </span>
+        </div>
+
+        <div class="card-body">
+
+          <table class="table table-hover">
+            <tbody>
+              <tr>
+                <th>#</th>
+                <th>Appointment Name</th>
+                <th>Room Location</th>
+                <th>Date</th>
+                <th>Time Duration</th>
+                <th>Action</th>
+              </tr>
+
+              <tr *ngFor="let appoint of appointmentDetails; let i = index">
+                <th>{{ 1 + i }}</th>
+                <td>{{ appoint.agenda }}</td>
+                <td>{{ appoint.roomloc }}</td>
+                <td>{{ appoint.bookDate }}</td>
+                <td>{{ appoint.bookTime }}</td>
+
+                <td>
+                  <span *ngIf="appoint.user_id == user_id">
+                    <button (click)="editAppointment(appoint)" type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#editAppointment">
+                      Edit
+                    </button>
+                  </span>
+
+                  <span *ngIf="appoint.user_id == user_id">
+                    <button (click)=" deleteAppointment(appoint)" class="btn btn-sm btn-danger mx-3">
+                      Delete
+                    </button>
+                  </span>
+                  
+                </td>
+              </tr>
+              </tbody>
+
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="Appointment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Create Appointment</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+
+          <div *ngIf="roomWasBooked">
+            <small class="text-danger">Room was already booked form {{bookTime}}</small>
+          </div>
+
+          <form [formGroup]="Appointments">
+            <div class="row">
+
+              <div class="col-md-12">
+                <div class="mb-3">
+                  <label class="form-label">Appointment Name</label>
+                  <input type="text" formControlName="agenda" class="form-control form-control-sm"/>
+                  <p class="text-danger" *ngIf="is_submitted && errorControl.agenda.errors?.required">
+                    Field is required
+                  </p>
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="mb-3">
+                  <label class="form-label">Room Location</label>
+
+                  <select class="form-select form-select-sm" formControlName="roomloc" (change)="selectRoom($event)">
+                    <option selected disabled>Select option</option>
+                    <option *ngFor="let pt of roomList" [value]="pt.roomList">
+                      {{ pt.roomList }}
+                    </option>
+                  </select>
+
+                  <p class="text-danger" *ngIf="is_submitted && errorControl.roomloc.errors?.required">
+                    Field is required
+                  </p>
+
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="mb-3">
+                  <label class="form-label">Date</label>
+                  <input (change)="showTime($event)" type="date" formControlName="bookDate" class="form-control form-control-sm"/>
+                  <p class="text-danger" *ngIf="is_submitted && errorControl.bookDate.errors?.required">
+                    Field is required
+                  </p>
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div *ngIf="ToBookTime && selectedRoom">
+                  <div class="mb-3">
+                    <label class="form-label">Book Time</label>
+                    <select class="form-select form-select-sm" formControlName="bookTime" (change)="bookTimeForMeeting($event)">
+                      <option selected disabled>Select option</option>
+                      <option value="9 AM - 11 AM">9 AM To 11 AM</option>
+                      <option value="11 AM - 1 PM">11 AM To 1 PM</option>
+                      <option value="2 PM - 4 PM">2 PM To 4 PM</option>
+                      <option value="4 PM - 6 PM">4 PM To 6 PM</option>
+                    </select>
+                    <p class="text-danger" *ngIf="is_submitted && errorControl.bookTime.errors?.required">
+                      Field is required
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <button type="submit" (click)="appSubmit()" class="btn btn-primary btn-sm form-control">
+              Book Meeting Room
+            </button>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>  
+
+  <div class="modal fade" id="editAppointment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Update Appointment</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <div *ngIf="roomWasBook">
+          <small class="text-danger">Room was already booked from {{bookedTime}}</small>
+        </div>
+
+        <form [formGroup]="Appointments">
+
+          <div class="row">
+
+            <div class="col-md-12">
+              <div class="mb-3">
+                <label class="form-label">Appointment Name</label>
+                <input type="text" formControlName="agenda" [(ngModel)]="editData.agenda" class="form-control form-control-sm"/>
+                <p class="text-danger" *ngIf="is_submitted && errorControl.agenda.errors?.required">
+                  Field is required
+                </p>
+              </div>
+            </div>
+
+            <div class="col-md-12">
+
+              <div class="mb-3">
+                <label class="form-label">Room Location</label>
+                <select class="form-select form-select-sm" formControlName="roomloc" [(ngModel)]="editData.roomloc">
+                  <option>Select option</option>
+                  <option *ngFor="let pt of roomList" [value]="pt.roomList">
+                    {{ pt.roomList }}
+                  </option>
+                </select>
+
+                <p class="text-danger" *ngIf=" is_submitted && errorControl.roomloc.errors?.required">
+                  Field is required
+                </p>
+              </div>
+
+            </div>
+
+            <div class="col-md-12">
+              <div class="mb-3">
+                <label class="form-label">Date</label>
+                <input (change)="showTime($event)" type="date" formControlName="bookDate"  class="form-control form-control-sm" [(ngModel)]="editData.bookDate"/>
+                <p class="text-danger" *ngIf=" is_submitted && errorControl.bookDate.errors?.required">
+                  Field is required
+                </p>
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <div class="mb-3">
+                <label class="form-label">Book Time</label>
+                <select class="form-select form-select-sm" formControlName="bookTime" (change)="bookTimeForMeeting($event)" [(ngModel)]="editData.bookTime">
+                  <option selected disabled>Select option</option>
+                  <option value="9 AM - 11 AM">9 AM To 11 AM</option>
+                  <option value="11 AM - 1 PM">11 AM To 1 PM</option>
+                  <option value="2 PM - 4 PM">2 PM To 4 PM</option>
+                  <option value="4 PM - 6 PM">4 PM To 6 PM</option>
+                </select>
+
+                <p class="text-danger" *ngIf="is_submitted && errorControl.bookTime.errors?.required">
+                  Field is required
+                </p>
+
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" (click)=" editAppSubmit()" class="btn btn-primary btn-sm form-control">
+           Edit Booked Room
+          </button>
+          
+        </form>
+      </div>
+    </div>
+  </div>
+</div>  
+</div>

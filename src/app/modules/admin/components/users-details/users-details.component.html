@@ -1,0 +1,67 @@
+<div class="body-with">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+               <div class="card mt-4">
+
+                   <div class="card-header text-center">
+                       <h4>Registered Users</h4>
+                   </div>
+
+                   <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-sm">
+                            
+                            <tbody>
+                              <tr>
+                                  <td class="table-head">#</td>
+                                  <td class="table-head">First Name</td>
+                                  <td class="table-head">Last Name</td>
+                                  <td class="table-head">Email Address</td>
+                                  <td class="table-head">User Type</td>
+                                  <td class="table-head">Status</td>
+                                  <td colspan="2" class="table-head">Action</td>
+                                </tr>
+                                <tr *ngFor="let user of users, let i=index">
+
+                                  <td>{{i+1}}</td>
+                                  <td>{{user.fname}}</td>
+                                  <td>{{user.lname}}</td>
+                                  <td>{{user.email}}</td>
+
+                                  <td>
+                                    <span  *ngIf="user.userType == '0'">
+                                      User
+                                    </span>
+                                    <span  *ngIf="user.userType == '1'">
+                                      Admin
+                                    </span>
+                                  </td>
+
+                                  <td>
+                                    <span class="panding" *ngIf="user.isApprove == 0">
+                                      Pending...
+                                    </span>
+                                    <span class="approve" *ngIf="user.isApprove == 1">
+                                       Approved
+                                    </span>
+                                  </td>
+
+                                  <td colspan="2">
+                                    <div *ngIf="user.userType == '0' && user.isApprove==0" class="d-flex">
+                                      <button (click)="approveUser(user)" class="btn btn-primary btn-sm">Approve</button> 
+                                      <button (click)="deleteUserDetails(user)" class="btn btn-danger btn-sm mx-3">Decline</button> 
+                                    </div>
+                                  </td>
+                                  
+                                </tr>
+                            </tbody>
+                          </table>
+                    </div>
+                   </div>
+               </div>
+            </div>
+        </div>
+    </div>
+    
+</div>

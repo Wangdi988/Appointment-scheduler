@@ -1,0 +1,111 @@
+{
+  "users": [
+    {
+      "fname": "Sangay",
+      "lname": "Jamtsho",
+      "email": "admin@gmail.com",
+      "password": "qwertyuiop",
+      "userType": "1",
+      "isApprove": 1,
+      "id": 1
+    },
+    {
+      "fname": "Phuntsho",
+      "lname": "Tshewang",
+      "email": "phuntsho@gmail.com",
+      "userType": "0",
+      "password": "asdfghjkl",
+      "isApprove": 1,
+      "id": 2
+    },
+    {
+      "fname": "Sonam",
+      "lname": "Tashi",
+      "email": "sonam@gmail.com",
+      "userType": "0",
+      "password": "zxcvbnm",
+      "isApprove": 1,
+      "id": 3
+    },
+    {
+      "fname": "Sangay",
+      "lname": "Tshewang",
+      "email": "sangay@gmail.com",
+      "userType": "0",
+      "password": "poiuytrewq",
+      "isApprove": 0,
+      "id": 4
+    },
+    {
+      "fname": "Sangay",
+      "lname": "Tenzin",
+      "email": "tenzin@gmail.com",
+      "userType": "0",
+      "password": "poiuytrewq",
+      "isApprove": 0,
+      "id": 5
+    },
+    {
+      "fname": "Karma",
+      "lname": "Tshewang",
+      "email": "karma@gmail.com",
+      "userType": "0",
+      "password": "lkjhgfdsa",
+      "isApprove": 0,
+      "id": 6
+    },
+    {
+      "fname": "Sonam ",
+      "lname": "Tshering",
+      "email": "st@gmail.com",
+      "password": "123456789",
+      "userType": "0",
+      "isApprove": 0,
+      "id": 7
+    }
+  ],
+  "appointment": [
+    {
+      "agenda": "About BRD",
+      "roomloc": "Conference Room",
+      "bookDate": "2022-03-10",
+      "bookTime": "4 PM - 6 PM",
+      "user_id": 2,
+      "id": 1
+    },
+    {
+      "agenda": "About BPC Project",
+      "roomloc": "Conference Room",
+      "bookDate": "2022-03-18",
+      "bookTime": "2 PM - 4 PM",
+      "user_id": 2,
+      "id": 2
+    },
+    {
+      "agenda": "About System",
+      "roomloc": "Hall One",
+      "bookDate": "2022-03-06",
+      "bookTime": "4 PM - 6 PM",
+      "user_id": 3,
+      "id": 3
+    },
+    {
+      "agenda": "About Network",
+      "roomloc": "Conference Room",
+      "bookDate": "2022-03-07",
+      "bookTime": "9 AM - 11 AM",
+      "user_id": 3,
+      "id": 4
+    }
+  ],
+  "roomlist": [
+    {
+      "roomList": "Conference Room",
+      "id": 1
+    },
+    {
+      "roomList": "Hall One",
+      "id": 2
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+<div class="body-with">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+               <div class="card mt-4">
+
+                   <div class="card-header">
+                       Appointment list
+                   </div>
+                   
+                   <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-sm">
+                            
+                            <tbody>
+                                <tr>
+                                    <td class="table-head">#</td>
+                                    <td class="table-head">Appointment Name</td>
+                                    <td class="table-head">Room Location</td>
+                                    <td class="table-head">Date</td>
+                                    <td class="table-head">Time Duration</td>
+                                </tr>
+
+                                <tr *ngFor="let appoint of appointList, let i=index">
+                                    <td >{{i+1}}</td>
+                                    <td>{{appoint.agenda}}</td>
+                                    <td>{{appoint.roomloc}}</td>
+                                    <td>{{appoint.bookDate}}</td>
+                                    <td>{{appoint.bookTime}}</td>
+                                </tr>
+                            </tbody>
+                            
+                          </table>
+                    </div>
+                   </div>
+               </div>
+            </div>
+        </div>
+    </div>
+    
+</div>

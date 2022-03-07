@@ -1,0 +1,14 @@
+.card-header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.cards{
+   background: rgb(5, 91, 189);
+   height: 2em;
+   border-radius: 2px;
+    .text{
+        color: #fff;
+        padding-top: 4px;
+    }
+}
